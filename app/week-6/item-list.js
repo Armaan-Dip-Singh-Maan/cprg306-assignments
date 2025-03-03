@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Item from "./item";
-import itemsData from "./items.json";
+import itemsData from "./items";  // Import from items.js (not .json)
 
 export default function ItemList() {
   const [sortBy, setSortBy] = useState("name");
@@ -18,12 +18,10 @@ export default function ItemList() {
       return acc;
     }, {});
 
-    // Sort each category's items
     for (const category in grouped) {
       grouped[category].sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    // Convert to array for rendering
     sortedItems = Object.entries(grouped).map(([category, items]) => ({
       category,
       items,
